@@ -1,7 +1,7 @@
 # ============================================
 # Stage 1: Build React frontend
 # ============================================
-FROM node:22-alpine AS frontend-builder
+FROM node:24-alpine AS frontend-builder
 
 WORKDIR /app/front
 
@@ -16,7 +16,7 @@ RUN npm run build
 # ============================================
 # Stage 2: Prepare backend
 # ============================================
-FROM node:22-alpine AS backend-builder
+FROM node:24-alpine AS backend-builder
 
 WORKDIR /app/back
 
@@ -29,7 +29,7 @@ COPY back/ ./
 # ============================================
 # Stage 3: Final image
 # ============================================
-FROM node:22-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 

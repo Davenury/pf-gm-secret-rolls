@@ -3,6 +3,7 @@ const { getBasicSkills } = require('./repository/skills')
 const { getCampaigns, addCampaign } = require('./repository/campaigns')
 const { saveNoteForPlayer, deleteNoteForPlayer } = require('./repository/notes')
 const { saveHistory, getHistory, clearHistory } = require('./repository/history')
+const path = require("path")
 
 const express = require('express');
 const app = express();
@@ -96,7 +97,7 @@ app.delete('/api/v1/history', (req, res) => {
 
 app.use(express.static(path.join(__dirname, '../front/build')))
 
-app.get('*', (req, res) => {
+app.get('/{*splat}', (req, res) => {
   res.sendFile(path.join(__dirname, '../front/build/index.html'))
 })
 
