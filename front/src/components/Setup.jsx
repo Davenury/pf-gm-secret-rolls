@@ -20,7 +20,7 @@ export default function Setup({ onRoll, initialData, onSelectCampaign, onLoadCha
   const [campaigns, setCampaigns] = useState([])
 
   useEffect(() => {
-     fetch("http://localhost:8080/api/v1/campaigns")
+     fetch("/api/v1/campaigns")
       .then(res => res.json())
       .then(json => {
         setCampaigns(json)
@@ -29,7 +29,7 @@ export default function Setup({ onRoll, initialData, onSelectCampaign, onLoadCha
 
   useEffect(() => {
     if (campaign != "") {
-      fetch(`http://localhost:8080/api/v1/players?campaign=${encodeURI(campaign)}`)
+      fetch(`/api/v1/players?campaign=${encodeURI(campaign)}`)
         .then(res => res.json())
         .then(json => {
           setCharacters(json)

@@ -9,7 +9,7 @@ export default function History({ load }) {
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/v1/history`)
+    fetch(`/api/v1/history`)
       .then(res => res.json())
       .then(it => setHistory(it))
   }, [refresh])
@@ -25,7 +25,7 @@ export default function History({ load }) {
   }, {})
 
   const clearHistory = () => {
-    fetch(`http://localhost:8080/api/v1/history`, {
+    fetch(`/api/v1/history`, {
       method: "DELETE"
     }).then(res => {
       Swal.fire({

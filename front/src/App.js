@@ -27,7 +27,7 @@ function App() {
 
     const d = roll(c)
 
-    await fetch(`http://localhost:8080/api/v1/history`, {
+    await fetch(`/api/v1/history`, {
       method: "POST",
       body: JSON.stringify(d),
       headers: {

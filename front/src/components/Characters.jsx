@@ -37,7 +37,7 @@ export default function Characters() {
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/campaigns")
+    fetch("/api/v1/campaigns")
       .then(res => res.json())
       .then(json => {
         setCampaigns(json)
@@ -45,7 +45,7 @@ export default function Characters() {
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/players")
+    fetch("/api/v1/players")
       .then(res => res.json())
       .then(json => {
         setCharacters(json)
@@ -54,7 +54,7 @@ export default function Characters() {
   }, [refresh])
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/skills/basic")
+    fetch("/api/v1/skills/basic")
       .then(res => res.json())
       .then(json => setBasicSkills(json))
   }, [])
@@ -68,7 +68,7 @@ export default function Characters() {
     if (result) {
       let campaignCreated = false
 
-      await fetch("http://localhost:8080/api/v1/campaigns", {
+      await fetch("/api/v1/campaigns", {
         method: "POST",
         body: JSON.stringify({
           campaign: result.campaign,
@@ -102,7 +102,7 @@ export default function Characters() {
 
       if (campaignCreated) {
         await fetch(
-          `http://localhost:8080/api/v1/players/${encodeURI(result.campaign)}`,
+          `/api/v1/players/${encodeURI(result.campaign)}`,
           {
             method: "POST",
             body: JSON.stringify(result.player),
@@ -150,7 +150,7 @@ export default function Characters() {
 
     if (result) {
       await fetch(
-        `http://localhost:8080/api/v1/players/${encodeURIComponent(campaign)}/${charId}`,
+        `/api/v1/players/${encodeURIComponent(campaign)}/${charId}`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -197,7 +197,7 @@ export default function Characters() {
 
     if (result) {
       await fetch(
-        `http://localhost:8080/api/v1/notes/${encodeURI(campaign)}/${charId}`,
+        `/api/v1/notes/${encodeURI(campaign)}/${charId}`,
         {
           method: "POST",
           body: JSON.stringify(result),
@@ -230,7 +230,7 @@ export default function Characters() {
 
     if (result.isConfirmed) {
       await fetch(
-        `http://localhost:8080/api/v1/players/${charId}`,
+        `/api/v1/players/${charId}`,
         {
           method: "DELETE",
         }
@@ -252,7 +252,7 @@ export default function Characters() {
   const characterNotes = (charId, char, campaign) => {
     const deleteNote = (noteId) => {
       fetch(
-        `http://localhost:8080/api/v1/notes/${encodeURI(campaign)}/${charId}/${noteId}`,
+        `/api/v1/notes/${encodeURI(campaign)}/${charId}/${noteId}`,
         {
           method: "DELETE",
         }
