@@ -32,7 +32,7 @@ export async function showCreateCharacterDialog(
               class="pathfinder-swal-select"
             >
               ${
-                isCharDefined ? `<option value=${currentChar.campaign}>${currentChar.campaign}</option>` :
+                isCharDefined ? `<option value=${currentChar?.campaign}>${currentChar?.campaign}</option>` :
                   campaigns.map((campaign) => `
                     <option value="" disabled selected>
                       Select a campaign
@@ -58,7 +58,7 @@ export async function showCreateCharacterDialog(
 
               ${
                 isCharDefined ? `<input id="character-name"
-                  class="pathfinder-swal-input" value="${currentChar.char.name}" />` :
+                  class="pathfinder-swal-input" value="${currentChar?.char?.name}" />` :
                 `<input
                   id="character-name"
                   class="pathfinder-swal-input"
@@ -83,7 +83,7 @@ export async function showCreateCharacterDialog(
                 style="margin: 0"
               >
               ${
-                isCharDefined ? `<option value="${currentChar.char.type}">${currentChar.char.type}</option>` :
+                isCharDefined ? `<option value="${currentChar?.char?.type}">${currentChar?.char?.type}</option>` :
                 `<option value="player">Player</option>
                 <option value="minion">Minion</option>`
               }
@@ -106,7 +106,7 @@ export async function showCreateCharacterDialog(
                 class="pathfinder-avatar-preview"
               >
                 ${isCharDefined ? `<img
-                    src="${currentChar.char.avatar}"
+                    src="${currentChar?.char?.avatar}"
                     alt="Character avatar"
                   />` : `<span>?</span>`}
               </div>
@@ -196,7 +196,7 @@ export async function showCreateCharacterDialog(
             >
 
               ${
-                (isCharDefined ? Object.keys(currentChar.char.skills) : basicSkills).map((skill, index) => `
+                (isCharDefined ? Object.keys(currentChar?.char?.skills) : basicSkills).map((skill, index) => `
                   <div
                     class="pathfinder-skill-field"
                     data-skill-type="basic"
@@ -212,7 +212,7 @@ export async function showCreateCharacterDialog(
                       id="basic-skill-${index}"
                       data-skill="${skill}"
                       type="number"
-                      value="${isCharDefined ? currentChar.char.skills[skill] : "0"}"
+                      value="${isCharDefined ? currentChar?.char.skills[skill] : "0"}"
                       class="pathfinder-swal-input pathfinder-swal-number"
                     />
                   </div>
@@ -246,7 +246,7 @@ export async function showCreateCharacterDialog(
       const popup = Swal.getPopup();
 
       let avatarBase64 = null;
-      const tags = isCharDefined ? currentChar.char.tags : [];
+      const tags = isCharDefined ? currentChar?.char?.tags : [];
       const customSkills = [];
 
       /*
@@ -514,7 +514,7 @@ export async function showCreateCharacterDialog(
 
       const skills = {};
 
-      (isCharDefined ? Object.keys(currentChar.char.skills) : basicSkills).forEach((skill, index) => {
+      (isCharDefined ? Object.keys(currentChar?.char?.skills) : basicSkills).forEach((skill, index) => {
         const input =
           document.getElementById(
             `basic-skill-${index}`,
@@ -551,13 +551,13 @@ export async function showCreateCharacterDialog(
             name,
             type,
 
-            avatar: popup.__characterData.getAvatar() || currentChar.char.avatar,
+            avatar: popup.__characterData.getAvatar() || isCharDefined ? currentChar?.char?.avatar : "",
 
             tags:
             popup.__characterData.getTags(),
 
             skills: s,
-            notes: isCharDefined ? currentChar.char.notes : []
+            notes: isCharDefined ? currentChar?.char?.notes : []
         }
       };
     },

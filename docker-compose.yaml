@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/davenury/pf-gm-secret-rolls:v1.0.0
+    image: ghcr.io/davenury/pf-gm-secret-rolls:v1.0.1
     container_name: pf-rolls
 
     ports:
